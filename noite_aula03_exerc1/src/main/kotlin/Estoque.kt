@@ -1,4 +1,5 @@
 class Estoque {
-    var tipo: String? = null
-    var quantidade: Integer? = null
+    var produto: Produto? = null
+    var quantidade: Int? = null
+    var fornecedor: Fornecedor? = null
 }
