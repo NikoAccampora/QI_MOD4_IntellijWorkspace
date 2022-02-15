@@ -13,7 +13,13 @@ class Music {
         composer: String,
         record: String
     ) = model.Music(
-
         // Construtor da class Music do model
+    title = title,
+        yearOfRelease = yearOfRelease,
+        duration = duration,
+        record = record,
+        musicGender = musicGender,
+        album = album,
+        composer = composer
     )
 }
