@@ -1,8 +1,8 @@
-class PessoaFisica(
+ open class PessoaFisica(
     // Construtor da pessoa Física
     var cpf:String,
     var nome:String,
-    var rg:String
+    var rg:String?,
     // Info da pessoa
     matricula:Short,
     endereco:String,
@@ -10,4 +10,8 @@ class PessoaFisica(
     email: String
 ) : Pessoa(
     // Construtor da pessoa
+    telefone = telefone,
+    email = email,
+    matricula = matricula,
+    endereco = endereco
 )
