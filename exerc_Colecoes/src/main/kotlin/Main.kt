@@ -15,11 +15,11 @@ fun main(args: Array<String>) {
     val contIng = ingressos.size -1
 
     val ass01 = Assento(true)
-    val ass02 = Assento(false)
+    val ass02 = Assento(true)
     val ass03 = Assento(true)
     val ass04 = Assento(true)
     val ass05 = Assento(true)
-    val ass06 = Assento(false)
+    val ass06 = Assento(true)
     val ass07 = Assento(true)
     val ass08 = Assento(true)
     val ass09 = Assento(true)
@@ -34,9 +34,9 @@ fun main(args: Array<String>) {
     val cli4 = Cliente("Thaís",TipoCliente.comum,9f,ing04,ass04)
     val cli5 = Cliente("Paulo",TipoCliente.estudante,20f,ing05,ass05)
     val cli6 = Cliente("Mateus",TipoCliente.professor,24f,ing06,ass06)
-    val cli7 = Cliente("Rafael",TipoCliente.comum,3f,ing07,ass07)
+    val cli7 = Cliente("Rafael",TipoCliente.comum,3f,ing07,ass05)
     val cli8 = Cliente("Bruna",TipoCliente.idoso,5f,ing08,ass08)
-    val cli9 = Cliente("Henrique",TipoCliente.idoso,15f,ing09,ass09)
+    val cli9 = Cliente("Henrique",TipoCliente.idoso,15f,ing09,ass03)
     val cli10 = Cliente("Ana",TipoCliente.comum,17f,ing10,ass10)
 
     var clientes = mutableListOf<Cliente>(cli1,cli2,cli3,cli4,cli5,cli6,cli7,cli8,cli9,cli10)
@@ -44,49 +44,55 @@ fun main(args: Array<String>) {
 
 ////////CÁCULO DE DESCONTOS
 
-    for(Cliente in clientes){
-        if(Cliente.tipoCliente == TipoCliente.estudante){
-            Cliente.ingresso.preco = (Cliente.ingresso.preco*0.97f)
+    clientes.forEach(){
+        if(it.tipoCliente == TipoCliente.estudante){
+            it.ingresso.preco = (it.ingresso.preco*0.97f)
             println("")
-            System.out.printf("%s é estudante, preço do ingresso reduzido para %.2fR$",Cliente.nome,Cliente.ingresso.preco)
+            System.out.printf("%s é estudante, preço do ingresso reduzido para %.2fR$",it.nome,it.ingresso.preco)
             println("")
-        } else if(Cliente.tipoCliente == TipoCliente.professor){
-            Cliente.ingresso.preco = (Cliente.ingresso.preco*0.95f)
+        } else if(it.tipoCliente == TipoCliente.professor){
+            it.ingresso.preco = (it.ingresso.preco*0.95f)
             println("")
-            System.out.printf("%s é professor(a), preço do ingresso reduzido para %.2fR$",Cliente.nome,Cliente.ingresso.preco)
+            System.out.printf("%s é professor(a), preço do ingresso reduzido para %.2fR$",it.nome,it.ingresso.preco)
             println("")
-        } else if(Cliente.tipoCliente == TipoCliente.idoso){
-            Cliente.ingresso.preco = (Cliente.ingresso.preco*0.90f)
+        } else if (it.tipoCliente == TipoCliente.idoso){
+            it.ingresso.preco = (it.ingresso.preco*0.90f)
             println("")
-            System.out.printf("%s é idoso(a), preço do ingresso reduzido para %.2fR$",Cliente.nome,Cliente.ingresso.preco)
+            System.out.printf("%s é idoso(a), preço do ingresso reduzido para %.2fR$",it.nome,it.ingresso.preco)
             println("")
         }
 
 
     }
 
+
 ////////VALIDAR ASSENTOS
 
-    for(Cliente in clientes){
-        if(Cliente.assento.disponivel == false){
-            println("Assento indisponível para ${Cliente.nome}!")
+    clientes.forEach(){
+        if(it.assento.disponivel == false){
+            println("Assento indisponível para ${it.nome}!")
             println("--")
-        } else if (Cliente.assento.disponivel == true)
-            println("Assento Reservado Para ${Cliente.nome}.")
+        } else
+            println("Assento Reservado Para ${it.nome}.")
+            it.assento.disponivel = false
             println("--")
     }
 
 ////////VENDA DE INGRESSOS
 ////////CANCELAMENTO DE VENDAS
 
-    for(Cliente in clientes){
-        if(Cliente.dinheiro < Cliente.ingresso.preco){
-            println("${Cliente.nome} Não pode pagar pelo ingresso. Venda cancelada!")
+    clientes.forEach(){
+        if(it.dinheiro < it.ingresso.preco){
+            println("${it.nome} Não pode pagar pelo ingresso. Venda cancelada!")
+            it.assento.disponivel = true
             println("--")
-        } else if (Cliente.dinheiro >= Cliente.ingresso.preco)
-            println("Ingresso vendido para ${Cliente.nome}.")
+
+        } else
+            println("Ingresso vendido para ${it.nome}.")
+            ingressos.remove(it.ingresso)
             println("--")
     }
 
+    clientes.removeIf { it.dinheiro < it.ingresso.preco }
 
 }
