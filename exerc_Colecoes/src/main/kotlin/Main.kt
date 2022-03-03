@@ -1,15 +1,15 @@
 fun main(args: Array<String>) {
 
-    val ing01 = Ingresso(12f)
-    val ing02 = Ingresso(17f)
-    val ing03 = Ingresso(12f)
-    val ing04 = Ingresso(9f)
-    val ing05 = Ingresso(12f)
-    val ing06 = Ingresso(15f)
-    val ing07 = Ingresso(17f)
-    val ing08 = Ingresso(17f)
-    val ing09 = Ingresso(12f)
-    val ing10 = Ingresso(9f)
+    val ing01 = Ingresso(11.99f)
+    val ing02 = Ingresso(14.49f)
+    val ing03 = Ingresso(11.99f)
+    val ing04 = Ingresso(9.49f)
+    val ing05 = Ingresso(11.99f)
+    val ing06 = Ingresso(14.49f)
+    val ing07 = Ingresso(16.99f)
+    val ing08 = Ingresso(16.49f)
+    val ing09 = Ingresso(11.99f)
+    val ing10 = Ingresso(9.99f)
 
     var ingressos = mutableListOf<Ingresso>(ing01,ing02,ing03,ing04,ing05,ing06,ing07,ing08,ing09,ing10)
     val contIng = ingressos.size -1
@@ -44,6 +44,10 @@ fun main(args: Array<String>) {
 
 ////////CÁCULO DE DESCONTOS
 
+println("===================================================================")
+println("CALCULANDO DESCONTO DE INGRESSOS (ESTUDANTES, PROFESSORES E IDOSOS)")
+println("===================================================================")
+
     clientes.forEach(){
         if(it.tipoCliente == TipoCliente.estudante){
             it.ingresso.preco = (it.ingresso.preco*0.97f)
@@ -65,6 +69,9 @@ fun main(args: Array<String>) {
 
     }
 
+    println("==================================================")
+    println("CHECANDO STATUS DE DISPONIBILIDADE DOS ASSENTOS")
+    println("==================================================")
 
 ////////VALIDAR ASSENTOS
 
@@ -77,6 +84,10 @@ fun main(args: Array<String>) {
             it.assento.disponivel = false
             println("--")
     }
+
+    println("===================================================================")
+    println("PROCESSANDO VENDA DE INGRESSOS; POSSÍVEIS CANCELAMENTOS")
+    println("===================================================================")
 
 ////////VENDA DE INGRESSOS
 ////////CANCELAMENTO DE VENDAS
